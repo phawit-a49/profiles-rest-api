@@ -1,5 +1,5 @@
 from django.contrib import admin
-from profiles_api.models import UserProfile
+from profiles_api import models
 
 # Define the UserProfileAdmin
 class UserProfileAdmin(admin.ModelAdmin):
@@ -8,4 +8,5 @@ class UserProfileAdmin(admin.ModelAdmin):
     list_display = ['email', 'is_staff']
     list_filter = ['is_staff',]
 # Register the UserProfile model and associate it with UserProfileAdmin
-admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(models.UserProfile, UserProfileAdmin)
+admin.site.register(models.ProfileFeedItem)
