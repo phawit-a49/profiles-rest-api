@@ -6,12 +6,23 @@ class HelloSerializer(serializers.Serializer):
     """Serializes a name field for testing our APIView"""
     name = serializers.CharField(max_length=10)
 
+class HobbiesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Hobbies
+        fields = ('id', 'name')
+
+class PositionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Position
+        fields = ('id', 'name')
+
 class UserProfileSerializer(serializers.ModelSerializer):
     """Serializes a user profile object"""
-
+    hobbies = HobbiesSerializer(many=True)
+    position = PositionSerializer()
     class Meta:
         model = models.UserProfile
-        fields = ('id', 'email', 'name', 'password')
+        fields = ('id', 'email', 'name', 'password', 'hobbies', 'position')
         extra_kwargs = {
         'password' : {
             'write_only' : True,

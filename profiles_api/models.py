@@ -31,7 +31,11 @@ class UserProfileManager(BaseUserManager):
 
         return user
 
+class Hobbies(models.Model):
+    name = models.CharField(max_length=50)
 
+class Position(models.Model):
+    name = models.CharField(max_length=50)
 
 class UserProfile(AbstractBaseUser, PermissionsMixin):
     """Database model for users in the system"""
@@ -39,6 +43,9 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+
+    position = models.ForeignKey(Position, related_name="users", on_delete=models.SET_NULL, null=True)
+    hobbies = models.ManyToManyField(Hobbies, related_name='users')
 
     objects = UserProfileManager()
 

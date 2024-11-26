@@ -10,3 +10,5 @@ class UserProfileAdmin(admin.ModelAdmin):
 # Register the UserProfile model and associate it with UserProfileAdmin
 admin.site.register(models.UserProfile, UserProfileAdmin)
 admin.site.register(models.ProfileFeedItem)
+admin.site.register(models.Hobbies)
+admin.site.register(models.Position)
